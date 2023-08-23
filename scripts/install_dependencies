@@ -11,6 +11,6 @@ else
 	sudo yum install -y python3-pip
 fi
 
-python3 -m pip install pandas==1.5.3 dash plotly pyarrow dash_bootstrap_components
+python3 -m pip install pandas==1.5.3 dash plotly pyarrow
 
 aws s3 cp s3://cidaen-m14-capstone-dataset/social_network.parquet /tmp/
