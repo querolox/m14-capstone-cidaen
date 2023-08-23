@@ -1,16 +1,14 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
 
 import pandas as pd
 from datetime import date
 
-# Usamos hoja de estilos basada en Bootstrap de https://github.com/AnnMarieW/dash-bootstrap-templates
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
@@ -19,7 +17,7 @@ df = pd.read_parquet('/tmp/social_network.parquet')
 
 # LAYOUT
 app.layout = html.Div([
-    html.H1('Dashboard Social Networks QUEROLOX', style={
+    html.H1('Luis - Dashboard Social Networks', style={
             "text-align": "center", "margin-top": "24px", "margin-bottom": "48px"}),
     html.Div([
         html.Label('Datetime Range'),
@@ -45,6 +43,7 @@ app.layout = html.Div([
             labelStyle={'display': 'inline-block'}
         )
     ], style={"columnCount": 3, 'textAlign': "center", "margin-top": "24px", "margin-bottom": "48px"}),
+    
     html.Div([
         html.Div([
             html.Img(src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
@@ -74,7 +73,14 @@ app.layout = html.Div([
                 id='twitter-visit',
             )
         ]),
-    ], style={"columnCount": 4, 'textAlign': "center"}),
+        html.Div([
+            html.Img(src="https://logos-marcas.com/wp-content/uploads/2020/11/Twitch-Logo.png",
+                     style={"width": "100px"}),
+            html.H2(
+                id='twitch-visit',
+            )
+        ]),
+    ], style={"columnCount": 5, 'textAlign': "center"}),
     html.H3('Total Visits by Month', style={"textAlign": "center"}),
     dcc.Graph(
         id='total-visit-line'
@@ -111,6 +117,7 @@ app.layout = html.Div([
     Input('social-networks-dropdown', 'value'),
     Input('devices-checkbox', 'value'))
 def update_figures(start_date_selected, end_date_selected, social_networks_selected, devices_selected):
+
     total_visit = (
         df
         .loc[(df.social_network.isin(social_networks_selected)) &
@@ -145,7 +152,7 @@ def update_figures(start_date_selected, end_date_selected, social_networks_selec
              (df.datetime >= start_date_selected) &
              (df.datetime <= end_date_selected)]
     ).shape[0]
-
+    
     twitch_visit = (
         df
         .loc[(df.social_network == 'twitch') &
