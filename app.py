@@ -1,5 +1,5 @@
 import dash
-import dash_core_components as dcc
+from dash import dcc
 import dash_bootstrap_components as dbc
 from dash import html
 from dash.dependencies import Input, Output
@@ -20,11 +20,13 @@ df = pd.read_parquet('/tmp/social_network.parquet')
 
 # LAYOUT
 
-app.layout = html.Div(children=[
+
+app.layout = dbc.Container([
+#app.layout = html.Div(children=[
     dbc.Row(
         dbc.Col(
             html.H1('Carles - Dashboard for Social Networks')
-        )
+        ), align="center", justify="center"
     ),
     dbc.Row([
         dbc.Col(
@@ -38,7 +40,6 @@ app.layout = html.Div(children=[
                     end_date=date(2021, 4, 30),
                 )
             ])
-            
         ),
         dbc.Col(
             html.Div([
@@ -64,7 +65,7 @@ app.layout = html.Div(children=[
                 )
             ])
         )
-        ]
+        ], align="center", justify="center"
     ),
     dbc.Row([
         dbc.Col(
@@ -112,7 +113,7 @@ app.layout = html.Div(children=[
                 )
             ])
         )
-    ]),
+    ], align="center", justify="center" ), 
     dbc.Row([
         dbc.Row(
             html.H3('Total Visits by Month', style={"textAlign": "center"})
@@ -121,7 +122,7 @@ app.layout = html.Div(children=[
             dcc.Graph(
                 id='total-visit-line'
             )
-        )]
+        )], align="center", justify="center"
     ),
     dbc.Row([
         dbc.Row(
@@ -133,7 +134,8 @@ app.layout = html.Div(children=[
         )
     )
         
-    ]),
+    ], align="center", justify="center"
+    ),
     dbc.Row([
         dbc.Col([
             dbc.Row(
@@ -155,9 +157,9 @@ app.layout = html.Div(children=[
                 )
             )
         ])
-    ])
-
-]
+    ], align="center", justify="center"
+    )
+], fluid=True
 )
 
 
