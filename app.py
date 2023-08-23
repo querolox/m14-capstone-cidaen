@@ -22,11 +22,14 @@ df = pd.read_parquet('/tmp/social_network.parquet')
 
 
 app.layout = dbc.Container([
-#app.layout = html.Div(children=[
     dbc.Row(
         dbc.Col(
-            html.H1('Carles - Dashboard for Social Networks')
-        ), align="center", justify="center"
+            html.H1('Carles - Dashboard for Social Networks'),
+            align="center"
+        ), justify="center"
+    ),
+    dbc.Row(
+        html.Hr()
     ),
     dbc.Row([
         dbc.Col(
@@ -67,6 +70,9 @@ app.layout = dbc.Container([
         )
         ], align="center", justify="center"
     ),
+    dbc.Row([
+        html.Hr()
+    ]),
     dbc.Row([
         dbc.Col(
             html.Div([
