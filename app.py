@@ -51,7 +51,7 @@ app.layout = dbc.Container([
                     value=[social_network for social_network in df.social_network.unique()],
                     multi=True
                 )
-            ])
+            ]), width=2
         ),
         dbc.Col(
             html.Div([
@@ -63,7 +63,7 @@ app.layout = dbc.Container([
                     value=[device for device in df.device.unique()],
                     labelStyle={'display': 'inline-block'}
                 )
-            ])
+            ]), width=2
         )
         ], align="center", justify="center"
     ),
@@ -75,7 +75,7 @@ app.layout = dbc.Container([
                 html.H2(
                     id='total-visit',
                 )
-            ])
+            ]), width=1
         ),
         dbc.Col(
             html.Div([
@@ -84,7 +84,7 @@ app.layout = dbc.Container([
                 html.H2(
                     id='facebook-visit',
                 )
-            ])
+            ]), width=1
         ),
         dbc.Col(
             html.Div([
@@ -93,7 +93,7 @@ app.layout = dbc.Container([
                 html.H2(
                     id='instagram-visit',
                 )
-            ])
+            ]), width=1
         ),
         dbc.Col(
             html.Div([
@@ -102,7 +102,7 @@ app.layout = dbc.Container([
                 html.H2(
                     id='twitter-visit',
                 )
-            ])
+            ]), width=1
         ),
         dbc.Col(
             html.Div([
@@ -111,31 +111,36 @@ app.layout = dbc.Container([
                 html.H2(
                     id='twitch-visit',
                 )
-            ])
+            ]), width=1
         )
     ], align="center", justify="center" ), 
+
     dbc.Row([
-        dbc.Row(
-            html.H3('Total Visits by Month', style={"textAlign": "center"})
-        ),
-        dbc.Row(
-            dcc.Graph(
-                id='total-visit-line'
-            )
-        )], align="center", justify="center"
-    ),
-    dbc.Row([
-        dbc.Row(
-            html.H3('Total Visits by Social Networks', style={"textAlign": "center"})
-        ),
-        dbc.Row(
-        dcc.Graph(
-            id='total-visit-social-networks-line'
+        dbc.Col([
+            dbc.Row(
+                html.H3('Total Visits by Month', style={"textAlign": "center"})
+            ),
+            dbc.Row(
+                dcc.Graph(
+                    id='total-visit-line'
+                )
+            )], width=8
         )
-    )
-        
-    ], align="center", justify="center"
-    ),
+    ], align="center", justify="center"),
+
+    dbc.Row([
+        dbc.Col([
+            dbc.Row(
+                html.H3('Total Visits by Social Networks', style={"textAlign": "center"})
+            ),
+            dbc.Row(
+                dcc.Graph(
+                        id='total-visit-social-networks-line'
+                    )
+                )
+        ], width=8 )
+    ], align="center", justify="center"),
+
     dbc.Row([
         dbc.Col([
             dbc.Row(
@@ -146,7 +151,7 @@ app.layout = dbc.Container([
                     id='world-map'
                 )
             )
-        ]),
+        ], width=4),
         dbc.Col([
             dbc.Row(
                 html.H3('Total Visits by Device')
@@ -156,7 +161,7 @@ app.layout = dbc.Container([
                     id='diveces-pie'
                 )
             )
-        ])
+        ], width=4)
     ], align="center", justify="center"
     )
 ], fluid=True
